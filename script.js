@@ -3,6 +3,10 @@ window.onload = () => {
     const savedTable = localStorage.getItem("savedTableOG");
     const savedData = getCookie("minDigit");
 
+    if (isMobile()){
+        document.getElementById("formContainer").style.display = "block";
+    }
+
     if (savedColor){
         document.getElementById("box6").style.color = localStorage.getItem("block6Color");
         document.getElementById("select").selectedIndex = localStorage.getItem("option")
@@ -32,6 +36,10 @@ window.onload = () => {
         };
     }
 };
+
+function isMobile() {
+    return window.innerWidth <= 768;
+}
 
 function CreateTable(){
     document.getElementById("tableContainer").innerHTML = '';
@@ -89,6 +97,15 @@ function Trigger(){
 
 function Undo(){
     document.getElementById("formContainer").style.display = "block";
+}
+
+function HideShow(){
+    if(isMobile()){
+        if(document.getElementById("formContainer").style.display == "block")
+            Trigger();
+        else if(document.getElementById("formContainer").style.display == "none")
+            Undo();
+    }
 }
 
 function Calc(){
